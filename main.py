@@ -20,7 +20,7 @@ C = "\033[1;97m" #ابيض
 #~~~~~~~~~~~~~~~{الاوان}~~~~~~~~~~~~~~~~#
 #~~~~~~~~~~~~~~~{Telegram}~~~~~~~~~~~~~~~~
 
-ToKen = "5174179467:AAGxYwuSKcuOX5ZqFoZuqWB3ssqvU11khic"
+BOT_TOKEN = "5174179467:AAGxYwuSKcuOX5ZqFoZuqWB3ssqvU11khic"
 os.system('clear')
 bot = telebot.TeleBot(BOT_TOKEN)
 @bot.message_handler(commands = ["start"])
