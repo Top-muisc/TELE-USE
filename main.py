@@ -1,29 +1,16 @@
-import webbrowser  
-import requests
-import random
+import requests,user_agent,json,flask,telebot,random,os,sys
 import telebot
-import os
 from telebot import types
-from uuid import uuid4
-import webbrowser
-import time
-Z = '\033[1;31m' #احمر
-X = '\033[1;33m' #اصفر
-Z1 = '\033[2;31m' #احمر ثاني
-F = '\033[2;32m' #اخضر
-A = '\033[2;34m'#ازرق
-C = "\033[1;97m" #ابيض
-B = '\033[2;36m'#سمائي
-Y = '\033[1;34m' #ازرق فاتح
-E = '\033[1;31m' #احمر
-C = "\033[1;97m" #ابيض
-#~~~~~~~~~~~~~~~{الاوان}~~~~~~~~~~~~~~~~#
-#~~~~~~~~~~~~~~~{Telegram}~~~~~~~~~~~~~~~~
+from user_agent import generate_user_agent
+import logging
+from config import *
+from flask import Flask, request
 
-BOT_TOKEN = "5174179467:AAGxYwuSKcuOX5ZqFoZuqWB3ssqvU11khic"
-os.system('clear')
 bot = telebot.TeleBot(BOT_TOKEN)
-@bot.message_handler(commands = ["start"])
+server = Flask(__name__)
+logger = telebot.logger
+logger.setLevel(logging.DEBUG)
+
 def Start(message):
  Name = message.chat.first_name
  User = message.from_user.username 
@@ -859,9 +846,7 @@ def Morocco(message):
 		A4 = types.InlineKeyboardButton(f"🔎 User : {username} Pass : {password}",callback_data='TOP3')
 		o.add(A1,A2,A3,A4)
 		bot.edit_message_text(chat_id=message.chat.id,message_id=message.message_id,text="*تم تفعيل الادة الان انتظر الصيد 🐺 *",parse_mode = "markdown",reply_markup=o) 
-def sss1(message):
-    bot.edit_message_text(chat_id=message.chat.id,message_id=message.message_id,text="<strong>✅ حسناً ارسل حساب انستا ليتم فحصه بـ نمط\nuser:paas</strong>",parse_mode="html")		
-bot.polling(True)
+
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
 def redirect_message():
     json_string = request.get_data().decode("utf-8")
@@ -871,5 +856,6 @@ def redirect_message():
 
 if __name__ == "__main__":
     bot.remove_webhook()
-    bot.set_webhook(url="https://tele-bot7.herokuapp.com/"+str(BOT_TOKEN))
+    bot.set_webhook(url="https://sidrabot.herokuapp.com/"+str(BOT_TOKEN))
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
